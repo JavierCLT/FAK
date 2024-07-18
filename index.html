@@ -13,13 +13,11 @@
         function loadAudio() {
             var word = getQueryParam('word');
             if (word) {
-                // Decodificar el parámetro de la URL
-                var decodedWord = decodeURIComponent(word);
-                // Reemplazar comas y espacios por guiones bajos para el nombre del archivo
-                var fileName = decodedWord.replace(/, /g, '_').replace(/ /g, '_');
+                // Asumimos que el parámetro ya usa guiones en lugar de espacios o comas
+                var fileName = word;
                 document.getElementById('audio-source').src = 'https://tu-usuario.github.io/english-pronunciation-audios/audios/' + fileName + '.mp3';
                 document.getElementById('audio-player').load();
-                document.getElementById('word-display').innerText = 'Words: ' + decodedWord;
+                document.getElementById('word-display').innerText = 'Words: ' + word.replace(/-/g, ', ');
             } else {
                 document.getElementById('word-display').innerText = 'No words specified';
             }
