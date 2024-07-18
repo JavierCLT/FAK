@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn English Pronunciation</title>
+    <script>
+        // Función para obtener el valor del parámetro 'word' de la URL
+        function getQueryParam(param) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Función para cargar el audio basado en el parámetro 'word'
+        function loadAudio() {
+            var word = getQueryParam('word');
+            if (word) {
+                // Decodificar el parámetro de la URL
+                var decodedWord = decodeURIComponent(word);
+                // Reemplazar comas y espacios por guiones bajos para el nombre del archivo
+                var fileName = decodedWord.replace(/, /g, '_').replace(/ /g, '_');
+                document.getElementById('audio-source').src = 'https://tu-usuario.github.io/english-pronunciation-audios/audios/' + fileName + '.mp3';
+                document.getElementById('audio-player').load();
+                document.getElementById('word-display').innerText = 'Words: ' + decodedWord;
+            } else {
+                document.getElementById('word-display').innerText = 'No words specified';
+            }
+        }
+    </script>
+</head>
+<body onload="loadAudio()">
+    <h1>Learn English Pronunciation</h1>
+    <div>
+        <p id="word-display">Words: </p>
+        <audio id="audio-player" controls>
+            <source id="audio-source" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</body>
+</html>
