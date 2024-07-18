@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn English Pronunciation</title>
+    <title>FAK! Inglés para españoles</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,7 +23,11 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
+            margin-bottom: 10px;
+        }
+        h2 {
             margin-bottom: 20px;
+            color: #555;
         }
         .audio-container {
             margin-top: 20px;
@@ -47,9 +51,12 @@
             var word = getQueryParam('word');
             if (word) {
                 var fileName = word;
-                document.getElementById('audio-source').src = 'https://tu-usuario.github.io/english-pronunciation-audios/audios/' + fileName + '.mp3';
+                var formattedWords = word.split('_').map(function(w) {
+                    return w.charAt(0).toUpperCase() + w.slice(1);
+                }).join(', ');
+                document.getElementById('audio-source').src = 'https://javierclt.github.io/FAK/audios/' + fileName + '.mp3';
                 document.getElementById('audio-player').load();
-                document.getElementById('word-display').innerText = 'Words: ' + word.replace(/-/g, ', ');
+                document.getElementById('word-display').innerText = 'Palabras: ' + formattedWords;
             } else {
                 document.getElementById('word-display').innerText = 'No words specified';
             }
@@ -58,9 +65,9 @@
 </head>
 <body onload="loadAudio()">
     <div class="container">
-        <h1>Practica pronunciación en inglés</h1>
+        <h1>FAK! Inglés para españoles</h1>
+        <h2 id="word-display">Palabras: </h2>
         <div class="audio-container">
-            <p id="word-display">Words: </p>
             <audio id="audio-player" controls>
                 <source id="audio-source" type="audio/mpeg">
                 Your browser does not support the audio element.
